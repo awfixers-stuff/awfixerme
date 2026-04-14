@@ -6,6 +6,7 @@
       "name": "next-app",
       "dependencies": {
         "@clerk/nextjs": "^7.0.12",
+        "@radix-ui/react-navigation-menu": "^1.2.14",
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
         "lucide-react": "^1.8.0",
