@@ -1,5 +1,6 @@
 import { ClerkProvider } from "@clerk/nextjs"
 import { shadcn } from "@clerk/themes"
+import { Analytics } from "@vercel/analytics/next"
 import { Geist_Mono, Inter } from "next/font/google"
 
 import "./globals.css"
@@ -53,6 +54,7 @@ export default function RootLayout({
             </main>
           </ThemeProvider>
         </ClerkProvider>
+        <Analytics />
       </body>
     </html>
   )
