@@ -6,13 +6,14 @@ import { Button } from "@/components/ui/button"
 
 export function Footer() {
   const navigation = [
+    { name: "Blog", href: "/blog" },
     { name: "About", href: "/about" },
     { name: "Contact", href: "/contact" },
   ]
 
   const social = [
-    { name: "X", href: "https://x.com/ausrobdev" },
-    { name: "LinkedIn", href: "#" },
+    { name: "X", href: "https://x.com/awfixer" },
+    { name: "Discord", href: "/discord" },
   ]
 
   const legal = [{ name: "Privacy", href: "/privacy" }]
@@ -23,15 +24,20 @@ export function Footer() {
         <h2 className="text-2xl font-semibold tracking-tight text-balance md:text-4xl">
           Step into the Lounge
         </h2>
-        <p className="text-muted-foreground mx-auto max-w-lg text-pretty leading-relaxed">
-          The public home of AWFixer — projects, updates, and a place to connect.
-          Crimson on black, built to feel like a room worth staying in.
+        <p className="mx-auto max-w-lg leading-relaxed text-pretty text-muted-foreground">
+          The public home of AWFixer — projects, updates, and a place to
+          connect. Crimson on black, built to feel like a room worth staying in.
         </p>
         <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
           <Button size="lg" className="rounded-full px-8" asChild>
             <Link href="/contact">Get in touch</Link>
           </Button>
-          <Button variant="glass" size="lg" className="rounded-full px-8" asChild>
+          <Button
+            variant="glass"
+            size="lg"
+            className="rounded-full px-8"
+            asChild
+          >
             <Link href="/about">About AWFixer</Link>
           </Button>
         </div>
@@ -65,7 +71,7 @@ export function Footer() {
             <li key={item.name}>
               <Link
                 href={item.href}
-                className="text-muted-foreground text-sm transition-opacity hover:opacity-80"
+                className="text-sm text-muted-foreground transition-opacity hover:opacity-80"
               >
                 {item.name}
               </Link>
@@ -74,11 +80,11 @@ export function Footer() {
         </ul>
       </nav>
 
-      <div className="border-primary/15 bg-card/30 w-full max-w-4xl rounded-[2rem] border px-8 py-10 text-center shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)] backdrop-blur-xl">
-        <p className="text-primary font-semibold tracking-tight md:text-2xl">
+      <div className="w-full max-w-4xl rounded-[2rem] border border-primary/15 bg-card/30 px-8 py-10 text-center shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)] backdrop-blur-xl">
+        <p className="font-semibold tracking-tight text-primary md:text-2xl">
           AWFixer&apos;s Lounge
         </p>
-        <p className="text-muted-foreground mt-2 text-sm">
+        <p className="mt-2 text-sm text-muted-foreground">
           © {new Date().getFullYear()} AWFixer. All rights reserved.
         </p>
       </div>
