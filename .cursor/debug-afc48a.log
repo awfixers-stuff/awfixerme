@@ -1,0 +1,6 @@
+{"sessionId":"afc48a","runId":"post-fix","hypothesisId":"H3","location":"Nav.tsx:timeline-layout-effect","message":"timeline-effect-run","data":{"ease":"power3.out","itemCount":2},"timestamp":1776138131872}
+{"sessionId":"afc48a","runId":"post-fix","hypothesisId":"H1","location":"FaultyTerminal.tsx:useEffect","message":"terminal-effect-mount","data":{"resolvedDpr":1.600000023841858,"pause":false},"timestamp":1776138132009}
+{"sessionId":"afc48a","runId":"post-fix","hypothesisId":"H1","location":"FaultyTerminal.tsx:useEffect","message":"raf-loop-tick","data":{"rafTicks":180,"scrollEvents":0,"pageVisible":true,"canvasInView":true},"timestamp":1776138145696}
+{"sessionId":"afc48a","runId":"post-fix","hypothesisId":"H1","location":"FaultyTerminal.tsx:useEffect","message":"raf-loop-tick","data":{"rafTicks":360,"scrollEvents":14,"pageVisible":true,"canvasInView":true},"timestamp":1776138159276}
+{"sessionId":"afc48a","runId":"post-fix","hypothesisId":"H5","location":"FaultyTerminal.tsx:useEffect","message":"window-scroll-sample","data":{"scrollEvents":15,"rafTicks":360},"timestamp":1776138159358}
+{"sessionId":"afc48a","runId":"post-fix","hypothesisId":"H5","location":"FaultyTerminal.tsx:useEffect","message":"window-scroll-sample","data":{"scrollEvents":30,"rafTicks":397},"timestamp":1776138162180}

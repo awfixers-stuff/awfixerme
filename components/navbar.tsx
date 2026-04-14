@@ -20,6 +20,7 @@ import { cn } from "@/lib/utils"
 
 const ITEMS = [
   { label: "Home", href: "/" },
+  { label: "Blog", href: "/blog" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ] as const

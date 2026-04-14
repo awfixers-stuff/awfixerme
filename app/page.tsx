@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 import { auth } from "@clerk/nextjs/server"
 
 import { Button } from "@/components/ui/button"
@@ -25,7 +27,7 @@ export default async function Page() {
               <a href="#start">Explore</a>
             </Button>
             <Button variant="glass" size="lg" className="rounded-full px-8" asChild>
-              <a href="/about">Our story</a>
+              <Link href="/blog">Read the blog</Link>
             </Button>
           </div>
           {userId ? (

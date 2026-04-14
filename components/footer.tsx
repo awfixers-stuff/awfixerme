@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 
 export function Footer() {
   const navigation = [
+    { name: "Blog", href: "/blog" },
     { name: "About", href: "/about" },
     { name: "Contact", href: "/contact" },
   ]
