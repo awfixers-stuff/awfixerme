@@ -48,6 +48,12 @@
 }
 
 :root {
+    /* Used by @clerk/themes shadcn (modal backdrop, etc.) */
+    --color-black: oklch(0.08 0.02 20);
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+
     --background: oklch(0.985 0.004 20);
     --foreground: oklch(0.16 0.02 20);
     --card: oklch(0.99 0.006 20);

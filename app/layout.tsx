@@ -1,4 +1,5 @@
 import { ClerkProvider } from "@clerk/nextjs"
+import { shadcn } from "@clerk/themes"
 import { Geist_Mono, Inter } from "next/font/google"
 
 import "./globals.css"
@@ -39,7 +40,11 @@ export default function RootLayout({
           aria-hidden
         />
 
-        <ClerkProvider>
+        <ClerkProvider
+          appearance={{
+            baseTheme: shadcn,
+          }}
+        >
           <ThemeProvider>
             <Navbar />
             <main className="relative z-0 flex min-h-svh flex-col pt-28 pb-16 md:pt-32">
