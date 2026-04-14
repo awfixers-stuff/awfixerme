@@ -16,7 +16,10 @@ export function Footer() {
     { name: "Discord", href: "/discord" },
   ]
 
-  const legal = [{ name: "Privacy", href: "/privacy" }]
+  const legal = [
+    { name: "Privacy", href: "/privacy" },
+    { name: "Terms", href: "/terms" },
+  ]
 
   return (
     <footer className="mt-auto flex flex-col items-center gap-14 pt-20 lg:pt-28">

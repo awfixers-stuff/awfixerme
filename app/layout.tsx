@@ -69,7 +69,7 @@ export default function RootLayout({
               headerTitle: "text-[color:var(--clerk-card-fg)]",
               headerSubtitle: "text-[color:var(--clerk-muted-fg)]",
               socialButtonsBlockButton:
-                "border border-primary/20 bg-[color:var(--clerk-muted)]/80 hover:bg-[color:var(--clerk-muted)]",
+                "border border-primary/25 bg-muted/70 hover:bg-muted",
               dividerLine: "bg-primary/25",
               formFieldLabel: "text-[color:var(--clerk-card-fg)]",
               identityPreviewText: "text-[color:var(--clerk-card-fg)]",

@@ -94,7 +94,8 @@ export function Navbar() {
                 <UserButton
                   appearance={{
                     elements: {
-                      avatarBox: "size-9 rounded-full ring-1 ring-white/15",
+                      avatarBox:
+                        "size-9 rounded-full ring-2 ring-primary/35 ring-offset-2 ring-offset-background",
                     },
                   }}
                 />
@@ -175,7 +176,8 @@ export function Navbar() {
                 <UserButton
                   appearance={{
                     elements: {
-                      avatarBox: "size-10 rounded-full ring-1 ring-white/15",
+                      avatarBox:
+                        "size-10 rounded-full ring-2 ring-primary/35 ring-offset-2 ring-offset-background",
                     },
                   }}
                 />
