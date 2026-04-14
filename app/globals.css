@@ -47,6 +47,12 @@
     --radius-4xl: calc(var(--radius) * 2.6);
 }
 
+@layer components {
+  .container {
+    @apply mx-auto;
+  }
+}
+
 :root {
     /* Used by @clerk/themes shadcn (modal backdrop, etc.) */
     --color-black: oklch(0.08 0.02 20);
