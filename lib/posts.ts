@@ -1,60 +1,18 @@
-import fs from "node:fs"
-import path from "node:path"
+import type { Post as MarblePost } from "@usemarble/sdk/models"
+import { ContentFormat } from "@usemarble/sdk/models"
 
-import matter from "gray-matter"
-
-const POSTS_DIR = path.join(process.cwd(), "content/posts")
-
-function parseDate(value: unknown): string {
-  if (typeof value === "string" && value.trim()) {
-    const d = new Date(value)
-    if (!Number.isNaN(d.getTime())) return d.toISOString()
-  }
-  return new Date(0).toISOString()
-}
-
-function parseStringList(value: unknown): string[] {
-  if (Array.isArray(value)) {
-    return value
-      .filter((v): v is string => typeof v === "string")
-      .map((v) => v.trim())
-      .filter(Boolean)
-  }
-  if (typeof value === "string") {
-    return value
-      .split(/[,;]/)
-      .map((s) => s.trim())
-      .filter(Boolean)
-  }
-  return []
-}
-
-function parseOptionalString(value: unknown): string | null {
-  if (typeof value === "string" && value.trim()) return value.trim()
-  return null
-}
-
-function parseBool(value: unknown, fallback: boolean): boolean {
-  if (typeof value === "boolean") return value
-  if (value === "true") return true
-  if (value === "false") return false
-  return fallback
-}
+import { getMarble } from "@/lib/marble/client"
 
 export type PostMeta = {
   slug: string
   title: string
   description: string
-  /** ISO date string from frontmatter */
+  /** ISO date string */
   date: string
-  /** Topic labels (shown in cards and indexed for search) */
   tags: string[]
-  /** Single bucket, e.g. notes, build-log, design */
   category: string | null
-  /** Extra search phrases (not necessarily visible in UI) */
   keywords: string[]
   author: string | null
-  /** When true, hidden from lists and 404 in production builds */
   draft: boolean
 }
 
@@ -62,71 +20,99 @@ export type Post = PostMeta & {
   content: string
 }
 
-export function getPostSlugs(): string[] {
-  if (!fs.existsSync(POSTS_DIR)) return []
-  return fs
-    .readdirSync(POSTS_DIR)
-    .filter((f) => f.endsWith(".md"))
-    .map((f) => f.replace(/\.md$/, ""))
-}
-
-function metaFromData(
-  slug: string,
-  data: Record<string, unknown>,
-): Omit<PostMeta, "slug"> {
-  const title = typeof data.title === "string" ? data.title : slug
-  const description =
-    typeof data.description === "string" ? data.description : ""
-
-  return {
-    title,
-    description,
-    date: parseDate(data.date),
-    tags: parseStringList(data.tags),
-    category: parseOptionalString(data.category),
-    keywords: parseStringList(data.keywords),
-    author: parseOptionalString(data.author),
-    draft: parseBool(data.draft, false),
-  }
-}
-
-function isDraftBlocked(meta: Pick<PostMeta, "draft">): boolean {
-  return meta.draft && process.env.NODE_ENV === "production"
-}
-
-export function getPostBySlug(slug: string): Post | null {
-  const file = path.join(POSTS_DIR, `${slug}.md`)
-  if (!fs.existsSync(file)) return null
-  const raw = fs.readFileSync(file, "utf8")
-  const { data, content } = matter(raw) as {
-    data: Record<string, unknown>
-    content: string
-  }
-  const meta = metaFromData(slug, data)
-  if (isDraftBlocked(meta)) return null
-
-  return {
-    slug,
-    ...meta,
-    content,
-  }
-}
-
-export function getAllPosts(): PostMeta[] {
-  const items = getPostSlugs()
-    .map((slug) => {
-      const file = path.join(POSTS_DIR, `${slug}.md`)
-      if (!fs.existsSync(file)) return null
-      const raw = fs.readFileSync(file, "utf8")
-      const { data } = matter(raw) as {
-        data: Record<string, unknown>
+function keywordsFromFields(
+  fields: MarblePost["fields"],
+): string[] {
+  const out: string[] = []
+  for (const value of Object.values(fields)) {
+    if (typeof value === "string" && value.trim()) {
+      out.push(value.trim())
+    } else if (Array.isArray(value)) {
+      for (const v of value) {
+        if (typeof v === "string" && v.trim()) {
+          out.push(v.trim())
+        }
       }
-      const meta = metaFromData(slug, data)
-      if (isDraftBlocked(meta)) return null
-      return { slug, ...meta }
-    })
-    .filter((p): p is PostMeta => p !== null)
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    }
+  }
+  return out
+}
 
-  return items
+function toPostMeta(p: MarblePost): PostMeta {
+  const author = p.authors[0]?.name ?? null
+  const category = p.category?.name ?? null
+  const tags = p.tags.map((t) => t.name)
+  const draft = p.status === "draft"
+
+  return {
+    slug: p.slug,
+    title: p.title,
+    description: p.description ?? "",
+    date: p.publishedAt.toISOString(),
+    tags,
+    category,
+    keywords: keywordsFromFields(p.fields),
+    author,
+    draft,
+  }
+}
+
+function toPost(p: MarblePost): Post {
+  return {
+    ...toPostMeta(p),
+    content: p.content,
+  }
+}
+
+async function fetchAllPublishedPosts(): Promise<MarblePost[]> {
+  const marble = getMarble()
+  if (!marble) {
+    return []
+  }
+
+  const collected: MarblePost[] = []
+  const iterator = await marble.posts.list({
+    limit: 100,
+    page: 1,
+    status: "published",
+    format: ContentFormat.Markdown,
+    order: "desc",
+  })
+
+  for await (const page of iterator) {
+    collected.push(...page.result.posts)
+  }
+
+  return collected
+}
+
+export async function getPostSlugs(): Promise<string[]> {
+  const posts = await fetchAllPublishedPosts()
+  return posts.map((p) => p.slug)
+}
+
+export async function getPostBySlug(slug: string): Promise<Post | null> {
+  const marble = getMarble()
+  if (!marble) {
+    return null
+  }
+
+  try {
+    const { post } = await marble.posts.get({
+      identifier: slug,
+      format: ContentFormat.Markdown,
+      status: "published",
+    })
+    if (post.status === "draft" && process.env.NODE_ENV === "production") {
+      return null
+    }
+    return toPost(post)
+  } catch {
+    return null
+  }
+}
+
+export async function getAllPosts(): Promise<PostMeta[]> {
+  const posts = await fetchAllPublishedPosts()
+  return posts.map(toPostMeta)
 }

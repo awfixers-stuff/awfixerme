@@ -10,6 +10,8 @@ import { getPostBySlug, getPostSlugs } from "@/lib/posts"
 import { cn } from "@/lib/utils"
 import { extractToc } from "@/lib/toc"
 
+export const revalidate = 3600
+
 type PageProps = {
   params: Promise<{ slug: string }>
 }
@@ -26,15 +28,14 @@ function formatDate(iso: string) {
   }
 }
 
-export function generateStaticParams() {
-  return getPostSlugs()
-    .filter((slug) => getPostBySlug(slug) !== null)
-    .map((slug) => ({ slug }))
+export async function generateStaticParams() {
+  const slugs = await getPostSlugs()
+  return slugs.map((slug) => ({ slug }))
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params
-  const post = getPostBySlug(slug)
+  const post = await getPostBySlug(slug)
   if (!post) return { title: "Not found" }
   return {
     title: post.title,
@@ -50,7 +51,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function BlogPostPage({ params }: PageProps) {
   const { slug } = await params
-  const post = getPostBySlug(slug)
+  const post = await getPostBySlug(slug)
   if (!post) notFound()
 
   const toc = extractToc(post.content)
