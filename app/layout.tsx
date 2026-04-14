@@ -44,6 +44,37 @@ export default function RootLayout({
         <ClerkProvider
           appearance={{
             baseTheme: shadcn,
+            variables: {
+              colorBackground: "var(--clerk-card)",
+              colorForeground: "var(--clerk-card-fg)",
+              colorDanger: "var(--clerk-danger)",
+              colorInput: "var(--clerk-input)",
+              colorInputForeground: "var(--clerk-input-fg)",
+              colorModalBackdrop: "var(--clerk-backdrop)",
+              colorMuted: "var(--clerk-muted)",
+              colorMutedForeground: "var(--clerk-muted-fg)",
+              colorNeutral: "var(--clerk-neutral)",
+              colorPrimary: "var(--clerk-primary)",
+              colorPrimaryForeground: "var(--clerk-primary-fg)",
+              colorRing: "var(--clerk-ring)",
+            },
+            elements: {
+              cardBox:
+                "shadow-sm border border-primary/35 bg-[color:var(--clerk-card)] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.07)]",
+              popoverBox:
+                "shadow-sm border border-primary/35 bg-[color:var(--clerk-card)] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.07)]",
+              input:
+                "bg-transparent dark:bg-input/30 dark:border-primary/25 dark:focus-visible:border-primary/50 dark:focus-visible:ring-primary/30",
+              footer: "border-t border-primary/20",
+              headerTitle: "text-[color:var(--clerk-card-fg)]",
+              headerSubtitle: "text-[color:var(--clerk-muted-fg)]",
+              socialButtonsBlockButton:
+                "border border-primary/20 bg-[color:var(--clerk-muted)]/80 hover:bg-[color:var(--clerk-muted)]",
+              dividerLine: "bg-primary/25",
+              formFieldLabel: "text-[color:var(--clerk-card-fg)]",
+              identityPreviewText: "text-[color:var(--clerk-card-fg)]",
+              formFieldSuccessText: "text-[color:var(--clerk-primary)]",
+            },
           }}
         >
           <ThemeProvider>

@@ -56,6 +56,20 @@
 :root {
     /* Used by @clerk/themes shadcn (modal backdrop, etc.) */
     --color-black: oklch(0.08 0.02 20);
+
+    /* Clerk — align with app tokens; `.dark` overrides for crimson-on-black */
+    --clerk-card: var(--card);
+    --clerk-card-fg: var(--card-foreground);
+    --clerk-input: var(--input);
+    --clerk-input-fg: var(--card-foreground);
+    --clerk-muted: var(--muted);
+    --clerk-muted-fg: var(--muted-foreground);
+    --clerk-neutral: var(--foreground);
+    --clerk-primary: var(--primary);
+    --clerk-primary-fg: var(--primary-foreground);
+    --clerk-ring: var(--ring);
+    --clerk-danger: var(--destructive);
+    --clerk-backdrop: oklch(0.12 0.02 20 / 0.55);
     --font-weight-normal: 400;
     --font-weight-medium: 500;
     --font-weight-semibold: 600;
@@ -95,6 +109,21 @@
 }
 
 .dark {
+    --color-black: oklch(0.03 0.03 20);
+
+    --clerk-card: oklch(0.075 0.026 18);
+    --clerk-card-fg: oklch(0.96 0.018 20);
+    --clerk-input: oklch(0.95 0.02 20 / 0.11);
+    --clerk-input-fg: oklch(0.96 0.018 20);
+    --clerk-muted: oklch(0.13 0.03 19);
+    --clerk-muted-fg: oklch(0.62 0.08 22);
+    --clerk-neutral: oklch(0.96 0.018 20);
+    --clerk-primary: oklch(0.64 0.27 22);
+    --clerk-primary-fg: oklch(0.07 0.022 20);
+    --clerk-ring: oklch(0.64 0.27 22);
+    --clerk-danger: oklch(0.63 0.22 25);
+    --clerk-backdrop: oklch(0.02 0.04 20 / 0.92);
+
     --background: oklch(0.11 0.018 18);
     --foreground: oklch(0.96 0.01 20);
     --card: oklch(0.16 0.02 18);
