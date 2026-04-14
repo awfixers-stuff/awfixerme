@@ -1,6 +1,10 @@
+import { auth } from "@clerk/nextjs/server"
+
 import { Button } from "@/components/ui/button"
 
-export default function Page() {
+export default async function Page() {
+  const { userId } = await auth()
+
   return (
     <div className="flex min-h-svh p-6">
       <div className="flex max-w-md min-w-0 flex-col gap-4 text-sm leading-loose">
@@ -8,6 +12,11 @@ export default function Page() {
           <h1 className="font-medium">Project ready!</h1>
           <p>You may now add components and start building.</p>
           <p>We&apos;ve already added the button component for you.</p>
+          {userId ? (
+            <p className="text-muted-foreground mt-2 text-xs">
+              Server session active (auth checked with <code className="font-mono">auth()</code>).
+            </p>
+          ) : null}
           <Button className="mt-2">Button</Button>
         </div>
         <div className="font-mono text-xs text-muted-foreground">
