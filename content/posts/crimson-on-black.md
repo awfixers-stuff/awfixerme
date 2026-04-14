@@ -2,6 +2,17 @@
 title: "Crimson on black"
 description: "Why the palette leans dark, and how contrast keeps long reads comfortable."
 date: 2026-04-08
+category: design
+tags:
+  - palette
+  - dark-mode
+  - readability
+keywords:
+  - typography
+  - contrast
+  - accessibility
+author: AWFixer
+draft: false
 ---
 
 Dark backgrounds reduce glare for evening sessions. The crimson accent carries identity without shouting.

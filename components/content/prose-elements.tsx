@@ -2,20 +2,53 @@ import type { Components } from "react-markdown"
 
 /** Shared typography for Markdown / MDX (blog posts, About page, etc.). */
 export const proseElements: Components = {
-  h1: ({ children }) => (
-    <h1 className="mt-10 scroll-mt-32 text-2xl font-semibold tracking-tight first:mt-0 md:text-3xl">
+  h1: ({ children, id }) => (
+    <h1
+      id={id}
+      className="mt-10 scroll-mt-32 text-2xl font-semibold tracking-tight first:mt-0 md:text-3xl"
+    >
       {children}
     </h1>
   ),
-  h2: ({ children }) => (
-    <h2 className="mt-10 scroll-mt-32 text-xl font-semibold tracking-tight first:mt-0 md:text-2xl">
+  h2: ({ children, id }) => (
+    <h2
+      id={id}
+      className="mt-10 scroll-mt-32 text-xl font-semibold tracking-tight first:mt-0 md:text-2xl"
+    >
       {children}
     </h2>
   ),
-  h3: ({ children }) => (
-    <h3 className="mt-8 scroll-mt-32 text-lg font-semibold tracking-tight md:text-xl">
+  h3: ({ children, id }) => (
+    <h3
+      id={id}
+      className="mt-8 scroll-mt-32 text-lg font-semibold tracking-tight md:text-xl"
+    >
       {children}
     </h3>
+  ),
+  h4: ({ children, id }) => (
+    <h4
+      id={id}
+      className="mt-8 scroll-mt-32 text-base font-semibold tracking-tight md:text-lg"
+    >
+      {children}
+    </h4>
+  ),
+  h5: ({ children, id }) => (
+    <h5
+      id={id}
+      className="mt-6 scroll-mt-32 text-base font-semibold tracking-tight"
+    >
+      {children}
+    </h5>
+  ),
+  h6: ({ children, id }) => (
+    <h6
+      id={id}
+      className="mt-6 scroll-mt-32 text-sm font-semibold tracking-tight uppercase"
+    >
+      {children}
+    </h6>
   ),
   p: ({ children }) => (
     <p className="text-muted-foreground mt-4 text-pretty leading-relaxed first:mt-0 md:text-[1.05rem]">

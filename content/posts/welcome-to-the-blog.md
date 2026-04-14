@@ -2,6 +2,17 @@
 title: "Welcome to the blog"
 description: "A lightweight writing surface built into the site — Markdown files, static pages, no CMS lock-in."
 date: 2026-04-14
+category: meta
+tags:
+  - nextjs
+  - markdown
+  - static-site
+keywords:
+  - blog
+  - mdx
+  - content
+author: AWFixer
+draft: false
 ---
 
 This blog reads Markdown from the repository at build time. Each file in `content/posts` becomes a URL under `/blog/[slug]`.

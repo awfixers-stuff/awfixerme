@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 
-import { PostCard } from "@/components/blog/post-card"
+import { BlogIndexClient } from "@/components/blog/blog-index-client"
 import { getAllPosts } from "@/lib/posts"
 
 export const metadata: Metadata = {
@@ -25,13 +25,7 @@ export default function BlogIndexPage() {
           pages.
         </p>
 
-        <ul className="mt-12 flex flex-col gap-4">
-          {posts.map((post) => (
-            <li key={post.slug}>
-              <PostCard post={post} />
-            </li>
-          ))}
-        </ul>
+        <BlogIndexClient posts={posts} />
 
         {posts.length === 0 ? (
           <p className="text-muted-foreground mt-10 text-sm">
