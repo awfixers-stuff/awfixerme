@@ -14,29 +14,29 @@ export const metadata: Metadata = {
   },
 }
 
-const email = "hello@awfixer.dev"
+const email = "hello@awfixer.me"
 
 const links = [
-  { name: "X", href: "https://x.com/ausrobdev" },
-  { name: "LinkedIn", href: "#" },
+  { name: "X", href: "https://x.com/awfixer" },
+  { name: "Discord", href: "/discord" },
 ] as const
 
 export default function ContactPage() {
   return (
     <div className="container flex flex-1 flex-col px-4">
       <div className="mx-auto w-full max-w-3xl py-12 md:py-16">
-        <p className="text-primary mb-3 text-sm font-medium tracking-wide uppercase">
+        <p className="mb-3 text-sm font-medium tracking-wide text-primary uppercase">
           Contact
         </p>
         <h1 className="text-3xl font-semibold tracking-tight text-balance md:text-5xl">
           Get in touch
         </h1>
-        <p className="text-muted-foreground mt-4 max-w-2xl text-pretty text-lg leading-relaxed">
-          Questions, collaborations, or just a hello — pick a channel below. For longer
-          context, the{" "}
+        <p className="mt-4 max-w-2xl text-lg leading-relaxed text-pretty text-muted-foreground">
+          Questions, collaborations, or just a hello — pick a channel below. For
+          longer context, the{" "}
           <Link
             href="/blog"
-            className="text-primary font-medium underline decoration-primary/35 underline-offset-4 transition-colors hover:decoration-primary"
+            className="font-medium text-primary underline decoration-primary/35 underline-offset-4 transition-colors hover:decoration-primary"
           >
             blog
           </Link>{" "}
@@ -44,14 +44,14 @@ export default function ContactPage() {
         </p>
 
         <div className="mt-10 flex flex-col gap-4">
-          <div className="border-primary/15 bg-card/25 flex flex-col gap-4 rounded-3xl border p-6 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)] backdrop-blur-xl sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-col gap-4 rounded-3xl border border-primary/15 bg-card/25 p-6 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)] backdrop-blur-xl sm:flex-row sm:items-center sm:justify-between">
             <div className="flex items-start gap-3">
-              <div className="bg-primary/15 text-primary flex size-11 shrink-0 items-center justify-center rounded-2xl">
+              <div className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-primary/15 text-primary">
                 <Mail className="size-5" aria-hidden />
               </div>
               <div>
                 <p className="text-sm font-medium tracking-tight">Email</p>
-                <p className="text-muted-foreground mt-0.5 text-sm">
+                <p className="mt-0.5 text-sm text-muted-foreground">
                   Prefer async; I read everything.
                 </p>
               </div>
@@ -61,7 +61,7 @@ export default function ContactPage() {
             </Button>
           </div>
 
-          <div className="border-primary/15 bg-card/20 rounded-3xl border p-6 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)] backdrop-blur-xl">
+          <div className="rounded-3xl border border-primary/15 bg-card/20 p-6 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)] backdrop-blur-xl">
             <p className="text-sm font-medium tracking-tight">Elsewhere</p>
             <ul className="mt-4 flex flex-col gap-2">
               {links.map((item) => (
@@ -71,7 +71,7 @@ export default function ContactPage() {
                     {...(item.href.startsWith("http")
                       ? { target: "_blank", rel: "noopener noreferrer" }
                       : {})}
-                    className="text-foreground hover:text-primary inline-flex items-center gap-1 text-sm font-medium transition-colors"
+                    className="inline-flex items-center gap-1 text-sm font-medium text-foreground transition-colors hover:text-primary"
                   >
                     {item.name}
                     <ArrowUpRight className="size-3.5 opacity-70" aria-hidden />
